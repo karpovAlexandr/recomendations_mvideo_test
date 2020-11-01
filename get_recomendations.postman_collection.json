@@ -1,0 +1,50 @@
+{
+	"variables": [],
+	"info": {
+		"name": "mvideo_test",
+		"_postman_id": "f7c9a58b-8e7a-329d-d89e-28f7113f0a03",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "recomends_endpoint",
+			"request": {
+				"url": {
+					"raw": "http://127.0.0.1:5000/recommendations?sku=WP260qJAo6&coef=0.8",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"recommendations"
+					],
+					"query": [
+						{
+							"key": "sku",
+							"value": "WP260qJAo6",
+							"equals": true,
+							"description": "stock keeping unit"
+						},
+						{
+							"key": "coef",
+							"value": "0.8",
+							"equals": true,
+							"description": "recommendation_coefficient"
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
