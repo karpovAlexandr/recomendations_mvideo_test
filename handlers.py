@@ -5,7 +5,6 @@ import multiprocessing
 
 from decorators import timer
 
-
 OUTPUT_FILE = 'recommends.csv'
 
 
@@ -84,11 +83,13 @@ class MultiprocessingFileReader(FileReader):
         with open(self.csv_file, 'r', newline='') as csv_file:
             csv_data = csv.reader(csv_file)
 
-            for i in range(self.proc_num):
-                proc = FileReaderProcess(dataset=csv_data, sku=self.sku, coef=self.coef, matches=self.matches)
+            processes = [FileReaderProcess(dataset=csv_data, sku=self.sku, coef=self.coef, matches=self.matches) for i
+                         in range(self.proc_num)]
+
+            for proc in processes:
                 proc.start()
 
-            for i in range(self.proc_num):
+            for proc in processes:
                 proc.join()
 
         while not self.matches.empty():
