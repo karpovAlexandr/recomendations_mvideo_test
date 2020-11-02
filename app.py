@@ -17,11 +17,10 @@ def get_recommendations():
         :return - список рекомендаций в формате json
 
         {
-            "sku" : {идентификатор товарной позиции} => str,
-            "recommends_coef" : {показатель совпадения} => int,
-            "recommends_list" : {список подходящих товаров} => json
+            "sku" : {идентификатор товарной позиции} => string,
+            "recommends_coef" : {показатель совпадения} => number,
+            "recommends_list" : {список подходящих товаров} => array
         }
-
     """
 
     sku = request.args.get('sku', type=str)
@@ -33,6 +32,7 @@ def get_recommendations():
         recommends = MultiprocessingFileReader(sku=sku, coef=coef)
         recommends_list = recommends.run()
     except FileNotFoundError as err:
+        recommends_list = None
         print(f'для работы endpoint\'a, нужно приложить файл с названием \'recommends.csv\' в папку с проектом\n'
               f'{err}')
 
