@@ -3,7 +3,7 @@
 
 from flask import Flask, request, jsonify
 
-from handlers import recommends_reader
+from handlers import MultiprocessingFileReader
 
 app = Flask(__name__)
 
@@ -30,7 +30,8 @@ def get_recommendations():
     if coef is None:
         coef = 0
 
-    recommends_list = recommends_reader(sku=sku, coef=coef)
+    recommends = MultiprocessingFileReader(sku=sku, coef=coef)
+    recommends_list = recommends.run()
 
     return jsonify(
         sku=sku,
