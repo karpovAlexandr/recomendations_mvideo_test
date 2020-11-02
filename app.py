@@ -29,9 +29,12 @@ def get_recommendations():
 
     if coef is None:
         coef = 0
-
-    recommends = MultiprocessingFileReader(sku=sku, coef=coef)
-    recommends_list = recommends.run()
+    try:
+        recommends = MultiprocessingFileReader(sku=sku, coef=coef)
+        recommends_list = recommends.run()
+    except FileNotFoundError as err:
+        print(f'для работы endpoint\'a, нужно приложить файл с названием \'recommends.csv\' в папку с проектом\n'
+              f'{err}')
 
     return jsonify(
         sku=sku,
